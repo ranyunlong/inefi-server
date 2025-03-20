@@ -5,12 +5,14 @@ import { SignInDto } from './dto/sign-in.dto';
 import { instanceToPlain } from 'class-transformer';
 import { SignUpDto } from './dto/sign-up.dto';
 import { R } from '../../interfaces/r';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    private mailService: MailService,
   ) {}
 
   async validateUser(username: string, pass: string): Promise<any> {
@@ -36,7 +38,7 @@ export class AuthService {
       // const key = `geckoai.access.token:${data.id}:${data.username}`;
       // this.redis.set(key, accessToken);
       // this.redis.expire(key, Number(process.env.SESSION_EXPIRES_IN));
-      return accessToken;
+      return 'Bearer ' + accessToken;
     }
     return null;
   }
@@ -52,12 +54,10 @@ export class AuthService {
       ...rest,
     });
 
-    // try {
-    //   await this.mailService.send(user.uuid, {
-    //     to: [user.email],
-    //     subject: 'Please Confirm Your Email address.',
-    //   });
-    // } catch (e) {}
+    await this.mailService.send(user.uuid, {
+      to: [user.email],
+      subject: 'Please Confirm Your Email address.',
+    });
 
     return R.ok(user.uuid);
   }

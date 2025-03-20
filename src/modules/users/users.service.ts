@@ -104,11 +104,12 @@ export class UsersService {
       .createHmac('md5', uuid)
       .update(user.password)
       .digest('hex');
+
     const userEntity = plainToInstance(UserEntity, {
       ...user,
       uuid,
       gender: user.gender || 2,
-      pwd,
+      password: pwd,
     });
     return await this.repository.save(userEntity);
   }
@@ -119,6 +120,10 @@ export class UsersService {
    */
   public findOne(uuid: string): Promise<UserEntity | null> {
     return this.repository.findOne({ where: { uuid } });
+  }
+
+  public find(username: string) {
+    return this.repository.findOne({ where: { username } });
   }
 
   /**
@@ -147,7 +152,10 @@ export class UsersService {
     const find = await this.repository.findOneByOrFail([
       { username: account },
       { phone: account },
+      { email: account },
     ]);
+
+    console.log(find);
     const pwd = crypto
       .createHmac('md5', find.uuid)
       .update(password)

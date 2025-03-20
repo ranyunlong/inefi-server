@@ -8,6 +8,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from '../auth/auth.module';
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { UsersModule } from '../users/users.module';
+import { MailModule } from '../mail/mail.module';
+import { UserEntity } from '../users/user.entity';
 
 @Module({
   imports: [
@@ -51,6 +53,7 @@ import { UsersModule } from '../users/users.module';
     ConfigModule.forRoot({
       envFilePath: ['.env.local', '.env'],
     }),
+    MailModule,
     AuthModule,
     UsersModule,
   ],

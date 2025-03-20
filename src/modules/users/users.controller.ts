@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 
 import {
@@ -26,6 +27,7 @@ import { R } from '../../interfaces/r';
 import { UserUpdateDto } from './dto/user.update.dto';
 import { UserSaveDto } from './dto/user.save.dto';
 import { ApiResponsePageResult, ApiResponseResult } from '../decorators';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller({ path: 'users' })
 @ApiOkResponse({ description: 'Ok' })
@@ -34,6 +36,7 @@ import { ApiResponsePageResult, ApiResponseResult } from '../decorators';
 @ApiForbiddenResponse({ description: 'Forbidden' })
 @ApiNotFoundResponse({ description: 'Not Found' })
 @ApiExtraModels(UserVo)
+@UseGuards(AuthGuard)
 export class UsersController {
   constructor(private readonly service: UsersService) {}
 

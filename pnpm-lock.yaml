@@ -74,6 +74,9 @@ importers:
       ioredis:
         specifier: ^5.6.0
         version: 5.6.0
+      mail:
+        specifier: ^0.2.3
+        version: 0.2.3
       moment:
         specifier: ^2.30.1
         version: 2.30.1
@@ -2913,6 +2916,10 @@ packages:
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
+  mail@0.2.3:
+    resolution: {integrity: sha512-DP9ZW+IJaV/5sZ0ZCa2SnijLaluM+ztGheQX9zyyzmBBE/JfLKEpPd2+7uZ68Pfkn4oihsDSrwBxm4ZRG64g3g==}
+    engines: {node: '>= 0.4.0'}
+
   make-dir@4.0.0:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
@@ -3336,6 +3343,10 @@ packages:
 
   reflect-metadata@0.2.2:
     resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
+
+  reparse@0.1.2:
+    resolution: {integrity: sha512-WYVvlxnR1Nsy8TzDuslvopB6AJicP0cilq2PD8ap5cqre45n8eeR+WkzVVMCehqH/l+yuGKDEPN0KfBHVBMR2w==}
+    engines: {node: '>= 0.1.103'}
 
   repeat-string@1.6.1:
     resolution: {integrity: sha512-PV0dzCYDNfRi1jCDbJzpW7jNNDRuCOG/jI5ctQcGKt/clZD+YcPS3yIlWuTJMmESC8aevCFmWJy5wjAFgNqN6w==}
@@ -7182,6 +7193,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  mail@0.2.3:
+    dependencies:
+      reparse: 0.1.2
+
   make-dir@4.0.0:
     dependencies:
       semver: 7.7.1
@@ -7550,6 +7565,8 @@ snapshots:
       redis-errors: 1.2.0
 
   reflect-metadata@0.2.2: {}
+
+  reparse@0.1.2: {}
 
   repeat-string@1.6.1: {}
 

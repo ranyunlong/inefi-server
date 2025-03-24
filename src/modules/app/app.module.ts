@@ -9,7 +9,11 @@ import { AuthModule } from '../auth/auth.module';
 import { RedisModule } from '@nestjs-modules/ioredis';
 import { UsersModule } from '../users/users.module';
 import { MailModule } from '../mail/mail.module';
-import { UserEntity } from '../users/user.entity';
+import { DevicesModule } from '../devices/devices.module';
+import { EdgesModule } from '../edges/edges.module';
+import { EventsModule } from '../events/events.module';
+import { LicencesService } from '../licences/licences.service';
+import { LicencesModule } from '../licences/licences.module';
 
 @Module({
   imports: [
@@ -54,8 +58,12 @@ import { UserEntity } from '../users/user.entity';
       envFilePath: ['.env.local', '.env'],
     }),
     MailModule,
+    LicencesModule,
+    EventsModule,
     AuthModule,
     UsersModule,
+    DevicesModule,
+    EdgesModule,
   ],
 })
 export class AppModule {}

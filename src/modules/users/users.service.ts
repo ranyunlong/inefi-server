@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as crypto from 'crypto';
 import { v4 } from 'uuid';
 
-import { UserEntity } from './user.entity';
+import { UserEntity } from './entities/user.entity';
 import {
   Between,
   FindOptionsWhere,
@@ -14,7 +14,7 @@ import {
 } from 'typeorm';
 import { PageInfo } from '../../interfaces/page-info';
 import { UserVo } from './vos/user.vo';
-import { instanceToPlain, plainToInstance } from 'class-transformer';
+import { instanceToPlain } from 'class-transformer';
 import { UserPageDto } from './dto/user.page.dto';
 
 @Injectable()
@@ -105,13 +105,12 @@ export class UsersService {
       .update(user.password)
       .digest('hex');
 
-    const userEntity = plainToInstance(UserEntity, {
+    return await this.repository.save({
       ...user,
       uuid,
       gender: user.gender || 2,
       password: pwd,
     });
-    return await this.repository.save(userEntity);
   }
 
   /**
@@ -122,8 +121,8 @@ export class UsersService {
     return this.repository.findOne({ where: { uuid } });
   }
 
-  public find(username: string) {
-    return this.repository.findOne({ where: { username } });
+  public findOneByOrFail(where: Partial<UserEntity>) {
+    return this.repository.findOneByOrFail(where);
   }
 
   /**
@@ -155,7 +154,6 @@ export class UsersService {
       { email: account },
     ]);
 
-    console.log(find);
     const pwd = crypto
       .createHmac('md5', find.uuid)
       .update(password)

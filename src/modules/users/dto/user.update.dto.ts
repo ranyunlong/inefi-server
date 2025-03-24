@@ -1,6 +1,6 @@
 import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Exclude, Type } from 'class-transformer';
-import { UserEntity } from '../user.entity';
+import { UserEntity } from '../entities/user.entity';
 
 export class UserUpdateDto extends OmitType(UserEntity, [
   'id',
